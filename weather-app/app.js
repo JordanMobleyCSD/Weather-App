@@ -10,14 +10,14 @@ if (!address) {
     console.log('Please provide an address')
 } else {
     // callback chaining so they work together instead of logging seperately
-geocode(address, (error, { latitude, longitude, location } = {}) => {
-    if (error) {
-        return console.log(error)
+    geocode(address, (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+         return console.log(error)
     }
 
-    forecast(latitude, longitude, (error, forecastData) => {
-        if (error) {
-            return console.log(error)
+        forecast(latitude, longitude, (error, forecastData) => {
+             if (error) {
+                return console.log(error)
         }
 
         console.log(location)
