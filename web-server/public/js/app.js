@@ -26,7 +26,7 @@ weatherForm.addEventListener('submit', (e) => {
     messageTwo.textContent = ''
 
     //Allows the API to validate the location to determine if the location can be used
-    fetch('http://localhost:3000/weather?address=' + location).then((response) => {
+    fetch('/weather?address=' + location).then((response) => {
     response.json().then((data) => {
         if (data.error) {
             messageOne.textContent = data.error
