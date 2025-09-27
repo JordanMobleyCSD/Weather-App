@@ -1,17 +1,15 @@
 {
-  "name": "web-server",
+  "name": "weather-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "web-server/src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node web-server/src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
-    "hbs": "^4.0.1",
     "request": "^2.88.0"
   }
 }
