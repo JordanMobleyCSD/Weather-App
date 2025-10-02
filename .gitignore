@@ -5,3 +5,5 @@ package-lock.json
 package.json
 package-lock2.json
 package2.json
+.gitignore
+.DS_Store
