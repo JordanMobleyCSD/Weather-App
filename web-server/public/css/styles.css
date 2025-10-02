@@ -1,55 +1,222 @@
-body {
-    color: #333333;
-    font-family: arial;
-    max-width: 650px;
-    margin: auto;
-    padding: 0 16px;
 
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+:root{
+  --bg: #0e1117;
+  --bg2: #1b222c;
+  --text: #e6edf3;
+  --muted: #9aa4b2;
+  --brand: #4ea7ff;
+  --brand-2: #8cd3ff;
+  --success: #6ee7b7;
+  --warn: #fbbf24;
+  --error: #f87171;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
 }
 
-.main-content {
-    flex-grow: 1;
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #14314a 0%, transparent 60%),
+    radial-gradient(900px 700px at 110% 10%, #2a3f54 0%, transparent 60%),
+    linear-gradient(180deg, #0b0f16 0%, #0f1520 100%);
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
 
-footer {
-    color: #888888;
-    border-top: 1px solid #eeeeee;
-    margin-top: 16px;
-    padding: 16px 0;
+/* Main card */
+.main-content{
+  width: 100%;
+  max-width: 760px;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  position: relative;
 }
 
-header {
-    margin-top: 16px;
-    margin-bottom: 48px;
+/* Subtle glow line */
+.main-content::after{
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius) + 1px);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(78,167,255,.35), rgba(140,211,255,.15), rgba(255,255,255,0));
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
 }
 
-h1 {
-    font-size: 64px;
-    margin-bottom: 16px;
+/* Header */
+header{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-header a {
-    color: #888888;
-    margin-right: 16px;
-    text-decoration: none;
+header h1{
+  margin: 0;
+  font-size: clamp(24px, 3.5vw, 36px);
+  letter-spacing: .3px;
 }
 
-.portrait {
-    width: 35vw;
+header a{
+  color: var(--muted);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: color .2s ease, background .2s ease, transform .05s ease;
+  display: inline-block;
 }
 
-input {
-    border: 1px solid #cccccc;
-    padding: 8px;
+header a:hover{ color: var(--text); background: rgba(255,255,255,.06); }
+header a:active{ transform: translateY(1px); }
+
+@media (min-width: 560px){
+  header{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header nav{ display: flex; gap: 6px; }
 }
 
-button {
-    cursor: pointer;
-    border: 1px solid #888888;
-    background: #888888;
-    color: white;
-    padding: 8px;
+/* Intro line */
+.main-content > p:first-of-type{
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Form */
+form{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+input[placeholder="Location"]{
+  width: 100%;
+  padding: 14px 14px;
+  background: #0f1621;
+  border: 1px solid rgba(255,255,255,.08);
+  color: var(--text);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+input::placeholder{ color: #7d8896; }
+
+input:focus{
+  border-color: rgba(78,167,255,.7);
+  box-shadow: 0 0 0 3px rgba(78,167,255,.25);
+  background: #0d131c;
+}
+
+button{
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--brand), var(--brand-2));
+  color: #0b0f16;
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .05s ease, filter .2s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 20px rgba(78,167,255,.35);
+}
+
+button:hover{ filter: brightness(1.05); }
+button:active{ transform: translateY(1px); }
+button:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Messages / Results */
+#message-1,
+#message-2{
+  min-height: 22px;
+  margin: 4px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#message-1{ color: var(--muted); }
+#message-2{ color: var(--success); }
+
+/* Status helpers (use via JS: addClass) */
+.is-loading button{
+  position: relative;
+  pointer-events: none;
+}
+.is-loading button::after{
+  content: "";
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(0,0,0,.25);
+  border-top-color: rgba(0,0,0,.6);
+  animation: spin .8s linear infinite;
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+}
+
+.msg--ok    { color: var(--success) !important; }
+.msg--warn  { color: var(--warn) !important; }
+.msg--error { color: var(--error) !important; }
+
+@keyframes spin{ to { transform: translateY(-50%) rotate(360deg); } }
+
+/* Footer */
+footer{
+  margin-top: 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  opacity: .9;
+}
+
+/* Respect user’s motion settings */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* Optional: light mode (auto if system is light) */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #f7fafc;
+    --bg2:#ffffff;
+    --text:#0b1220;
+    --muted:#5b6677;
+    --shadow: 0 10px 30px rgba(0,0,0,.12);
+  }
+  body{
+    background:
+      radial-gradient(1200px 800px at 10% -10%, #e8f2ff 0%, transparent 60%),
+      radial-gradient(900px 700px at 110% 10%, #f0f7ff 0%, transparent 60%),
+      linear-gradient(180deg, #eef3fb 0%, #ffffff 100%);
+    color: var(--text);
+  }
+  .main-content{
+    background: rgba(255,255,255,.9);
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  input[placeholder="Location"]{ background: #f5f8ff; color: var(--text); }
+  input:focus{ background: #fff; }
+  button{ color: #0a0f18; }
 }
