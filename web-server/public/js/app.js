@@ -1,11 +1,3 @@
-console.log('Client side JavaScript file is loaded')
-
-// fetch('http://puzzle.mead.io/puzzle').then((response) => {
-//     response.json().then((data) => {
-//         console.log(data)
-//     })
-// })
-
 
 
 //Interactive form for information to display client side
@@ -14,7 +6,7 @@ const search = document.querySelector('input')
 const messageOne = document.querySelector('#message-1')
 const messageTwo = document.querySelector('#message-2')
 
-messageOne.textContent = 'From JavaScript'
+messageOne.textContent = 'Your Forecast'
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()

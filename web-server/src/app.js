@@ -1,7 +1,7 @@
 // weatherapp.com
 // weatherapp.com/help
 // weatherapp.com/about
-
+require('dotenv').config();
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
@@ -52,25 +52,6 @@ app.get('/help', (req, res) => {
 
 
 
-//Can return html and JSON elements to page 
-// app.get('', (req, res) => {
-//     res.send('<h1>Weather</h1>')
-// })
-
-// app.get('/help', (req, res) => {
-//     res.send({
-//         name: 'Jordan',
-//         age: 26
-//     })
-// })
-
-// //challenge to add two new routes to server (about, weather)
-// //challenge update lst two routes, weather = JSON, about = title HTML
-// app.get('/about', (req, res) => {
-//     res.send('<h1>About</h1>')
-// })
-
-
 
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
@@ -96,12 +77,6 @@ app.get('/weather', (req, res) => {
         })
         })
     })
-
-    // res.send({
-    //     forecast: 'It is currently sunny',
-    //     location: 'Live from Charlotte',
-    //     address: req.query.address
-    // })
 })
 
 app.get('/products', (req, res) => {

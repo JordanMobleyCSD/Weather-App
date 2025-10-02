@@ -1,7 +1,7 @@
 const request = require('request')
 
 const geocode = (address, callback) => {
-    const url = 'https://api.mapbox.com/search/geocode/v6/forward?q='+ encodeURIComponent(address) +'&access_token=pk.eyJ1IjoiYWthcmk0IiwiYSI6ImNtZXgxMXZ1bjEwOXgya3BvbzNhYXZ4amkifQ.0AEHIBqpB6kwBLN2CgwP_g'
+    const url = 'https://api.mapbox.com/search/geocode/v6/forward?q='+ encodeURIComponent(address) +'&access_token=${MB_TOKEN}'
 
     // No need to use response anymore with destructuring because we can directly refrence the body
     request({ url: url, json: true }, (error, { body }) => {
